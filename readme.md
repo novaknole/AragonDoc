@@ -29,7 +29,7 @@ This gives us the address of `ANJLockMinter`.
 
 * Now, we go to the `Aragon Protocol` and run the following:
 
-```
+```js
 let a = await this.protocol.grant(
   // the first argument - the address of GuardiansRegistry
   // the second argument - the signature of stackAndActivate
@@ -50,7 +50,7 @@ This will give the authorization to the `ANJLockMinter` so it can call the `stac
 * Now, we go back to `Aragon Network Token` and run the following:
 
 
-```
+```js
 
 const ANJLockMinter     = artifacts.require('ANJLockMinter')
 const ANTv2MultiMinter  = artifacts.require('ANTv2MultiMinter');
@@ -75,7 +75,7 @@ This approves 9000 ANJ tokens and calls `ANJLockMinter` which calls `stakeAndAct
 
 *  At this point, Let's check the balance of the user(deployer - who called `approveAndCall`) on the `GuardiansRegistry` .
 
-```
+```js
 let k = await this.registry.detailedBalanceOf("The address of whoever called ApproveAndCall");
 console.log(k['active'].toString(), k['available'].toString(), k['locked'].toString(), k['pendingDeactivation'].toString());
 ```
@@ -87,7 +87,7 @@ In our case, it will be `396000000000000000000 0 0 0`.
 
 Let's try to manage so that we can unlock and get back 120 ANT on our address.
 
-```
+```js
 await this.registry.unlockActivation(
   "========GuardianAddress=======", // whoever wants to unlock the money.
   "========ANJLockMinterAddress=======", // ANJLockMinter
@@ -99,7 +99,7 @@ await this.registry.unlockActivation(
 
 This creates a `DeactivationRequest`. Let's check the balances again..
 
-```
+```js
 let k = await this.registry.detailedBalanceOf("0x94C34FB5025e054B24398220CBDaBE901bd8eE5e");
 console.log(k['active'].toString(), k['available'].toString(), k['locked'].toString(), k['pendingDeactivation'].toString());
 ```
@@ -109,7 +109,7 @@ This now shows `276000000000000000000 0 0 120000000000000000000`. So, everything
 
 * Then, we call
 
-```
+```js
 await this.registry.processDeactivationRequest(
    "0x94C34FB5025e054B24398220CBDaBE901bd8eE5e" // The address of the user|guardian.
 )
@@ -124,7 +124,7 @@ After this, we can see that balances change like this:
 
 * Final Step is this:
 
-```
+```js
 await this.registry.unstake(
     "0x94C34FB5025e054B24398220CBDaBE901bd8eE5e", // guardian | user
     bigExp(145, 18)
