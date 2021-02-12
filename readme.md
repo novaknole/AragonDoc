@@ -9,7 +9,7 @@ and `DAI` address(`0xb08E32D658700f768f5bADf0679E153ffFEC42e6`).
 
 * Once the above is done, we copy the `GuardianRegistry` address and go to `Aragon-Network-Token`.
 
-```
+```js
 const ANJAddress                = "0x96286BbCac30Cef8dCB99593d0e28Fabe95F3572";
 const ANTv2Address              = "0xf0f8D83CdaB2F9514bEf0319F1b434267be36B5c";
 const ANTv2MultiMinterAddress   = "0xF64bf861b8A85927FAdd9724E80C2987f82a9259";
