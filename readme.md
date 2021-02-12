@@ -17,7 +17,10 @@ const GuardianRegistryAddress   = "===============COPY HERE===================";
 
 const ANJLockMinter  = artifacts.require('ANJLockMinter')
 
-const ANJLockMinterInstance   = await ANJLockMinter.new(ANTv2MultiMinterAddress, ANTv2Address, ANJAddress, GuardianRegistryAddress);
+const ANJLockMinterInstance = await ANJLockMinter.new(
+      ANTv2MultiMinterAddress, ANTv2Address, 
+      ANJAddress, GuardianRegistryAddress
+);
 
 console.log(ANJLockMinterInstance.address, " ANJ Lock Minter");
 ```
