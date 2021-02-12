@@ -119,7 +119,7 @@ After this, we can see that balances change like this:
 
 ```
 276000000000000000000 120000000000000000000 0 0
-```.
+```
 
 
 * Final Step is this:
