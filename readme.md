@@ -30,6 +30,9 @@ This gives us the address of `ANJLockMinter`.
 * Now, we go to the `Aragon Protocol` and run the following:
 
 ```js
+
+const utils = this.environment.web3.utils;
+
 let a = await this.protocol.grant(
   // the first argument - the address of GuardiansRegistry
   // the second argument - the signature of stackAndActivate
