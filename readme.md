@@ -1,3 +1,42 @@
+This goes into package.json
+
+```
+"deploy-lock-rinkeby": "yarn compile && yarn compile:mocks && buidler --config buidler.config.js --network rinkeby deploy-lock-minter-testnet"
+```
+
+This goes into `buidler.config.json`
+
+```
+const { DeployLockMinterTestnet } = require('./deploy/deploy-lock-minter-testnet')
+
+
+task('deploy-lock-minter-testnet', 'This deploys ANJLockMinter')
+  .setAction(DeployLockMinterTestnet)
+```
+
+This goes into `deploy-lock-minter-testnet`
+
+```
+const { bigExp } = require('@aragon/contract-helpers-test')
+
+async function DeployLockMinterTestnet({ deploy }) {
+
+
+}   
+
+
+
+module.exports = {
+    DeployLockMinterTestnet
+}
+
+// yarn deploy-protocol --network rinkeby
+// yarn deploy-lock-rinkeby
+
+```
+
+----
+
 ### Rinkeby Deployment............
 
 
