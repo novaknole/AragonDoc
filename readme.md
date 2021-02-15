@@ -1,12 +1,12 @@
 This goes into package.json
 
-```
+```js
 "deploy-lock-rinkeby": "yarn compile && yarn compile:mocks && buidler --config buidler.config.js --network rinkeby deploy-lock-minter-testnet"
 ```
 
 This goes into `buidler.config.json`
 
-```
+```js
 const { DeployLockMinterTestnet } = require('./deploy/deploy-lock-minter-testnet')
 
 
@@ -16,7 +16,7 @@ task('deploy-lock-minter-testnet', 'This deploys ANJLockMinter')
 
 This goes into `deploy-lock-minter-testnet`
 
-```
+```js
 const { bigExp } = require('@aragon/contract-helpers-test')
 
 async function DeployLockMinterTestnet({ deploy }) {
