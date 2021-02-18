@@ -42,3 +42,5 @@ without any penalties.
 
 Maybe in the schedule function, we somehow check the `config` validity(if the amounts are set and not 0,  if the `resolver` address implements `IArbitrable`) 
 and so on.
+
+**NOTE** When deploying officially, note that setting valid `config` object is MUST.
