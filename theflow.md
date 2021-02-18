@@ -34,6 +34,14 @@ Now, I can still call `schedule`, pass the same config (since it's important tha
 Example:
 
 ```js
+
+const from = (await web3.eth.getAccounts())[0];
+const nonce = (BigNumber.from(1));
+const currentDate = Math.round(Date.now() / 1000) + 0 + 60;
+const FAILURE_MAP ='0x0000000000000000000000000000000000000000000000000000000000000000';
+const EMPTY_BYTES = '0x00';
+  
+  
 governQueue.methods.schedule(
         {
           payload: {
@@ -60,7 +68,7 @@ governQueue.methods.schedule(
             rules: "0x"
           }
         }
-    )
+)
 ```
 
 The solution could be that we somehow do some checks on the `schedule` function so that at least resolver has specific `implementsInterface` and token addresses
