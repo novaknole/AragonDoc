@@ -44,3 +44,9 @@ Maybe in the schedule function, we somehow check the `config` validity(if the am
 and so on.
 
 **NOTE** When deploying officially, note that setting valid `config` object is MUST.
+
+
+**Problem 3**
+
+Is it normal that I can submit my proposal on-chain multiple times after the proposal is finished from snapshot ?
+
