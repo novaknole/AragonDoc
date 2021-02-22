@@ -74,3 +74,22 @@ export function buildEventHandlerId(
 // which has an interface in common with `ContainerEventExecute`, exists with the same ID, code: SubgraphSyncingFailure, id: QmPLjMDYPBCyMjDNiSbYG4ZeTgqFUxxk5R6SvF6aEYZEWk
 
 
+**Problem 6**
+
+Subgraph instance failed to run: Failed to process trigger in block #8117766 (cacdfd5cd0f8a1ace6d0fe41d5063ce4d32f80ecee7d26aeb238a4a78599a941), transaction 4b32577a9efe23a77704e7dcb54d90d8e0e3332b12fc28742e083114c08f5a87: Entity ContainerEventChallenge[0x3ec3929f0af90f2d66b5bc0286f87429ac659d411582babe9076684e30c49c60challenge0xf]: missing value for non-nullable field `resolver` wasm backtrace: 0: 0x225c - <unknown>!generated/schema/ContainerEventChallenge#save 1: 0x22fc - <unknown>!src/utils/events/handleContainerEventChallenge 2: 0x2462 - <unknown>!src/GovernQueue/handleChallenged , code: SubgraphSyncingFailure, id:
+  
+```js
+handleChallenged() 
+
+let resolver = ConfigEntity.load(queue.config).resolver
+let containerEvent = handleContainerEventChallenge(container, event, resolver)
+
+export function handleContainerEventChallenge(
+  container: ContainerEntity,
+  ethereumEvent: ChallengedEvent,
+  resolver: Bytes
+):
+containerEvent.collateral = collateral.id
+containerEvent.resolver = resolver
+```
+
