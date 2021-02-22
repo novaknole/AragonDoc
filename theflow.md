@@ -54,3 +54,23 @@ Is it normal that I can submit my proposal on-chain multiple times after the pro
 
 Let's say we deployed Aragon Protocol. and `START_DATE` was specified as 2021, 15th February and `TERM_DURATION` as 60*10 seconds. Let's say 5 days have passed and we didn't touch protocol at all.(This means that we never called `ensureCurrentTermId` which would call `_heartbeat` automatically). Now, when we call `createDispute` from the `GovernQueue` , it will fail due to `CLK_TOO_MANY_TRANSITIONS`. The problem is that the transition count returned from `_neededTermTransitions` is more than 1. This means that we have to call `heartbeat` by hand. Now, with the DURATION with 60*10 seconds, and 5 days have passed since `START_DATE`,  It appears that I have to call `heartbeat` 558 so that it gets up to date. 558 is so big that Because of this, the gas usage is too huge, it almost requires the same amount as the block gas limit which means my transaction most of the time will never get executed.
 
+
+**Problem 5**
+
+```js
+//Govern subgraph
+export function buildEventHandlerId(
+  containerHash: string,
+  eventName: string,
+  logIndex: string
+): string {
+  return containerHash +  eventName + logIndex.toString()
+}
+```
+
+
+// Subgraph instance failed to run: Error while processing block stream for a subgraph: tried to set entity of type `ContainerEventExecute` 
+// with ID "0x8942a520ad1d0965f25fe3f5bcae79c841da5ed4047ce35575c2b89bad1da1fe0x9" but an entity of type `ContainerEventSchedule`, 
+// which has an interface in common with `ContainerEventExecute`, exists with the same ID, code: SubgraphSyncingFailure, id: QmPLjMDYPBCyMjDNiSbYG4ZeTgqFUxxk5R6SvF6aEYZEWk
+
+
