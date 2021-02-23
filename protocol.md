@@ -73,10 +73,10 @@ by 1. The more the weight, the more will be penalty in case of losing and the mo
  
 * Then, comes `confirmAppeal`. If nobody confirms the above appeal and enough time gets passed, the dispute and round will be ended and the final ruling
 will be whatever the `createAppeal` came up with. So, if someone makes an `appeal`, it's important that we confirm it, otherwise, `createdAppeal` just wins every time.
- * If the round that has to get created is the last one, 
-   * the dispute state becomes `Adjucating`, which means there'll be no `drafting` at all.
-   * people now can vote on it, but since there was no draft and there was no choosen guardians, in this last round, anyone can vote if they have enough weight - `(activeBalance * 1000 / minActiveBalance) != 0 `. When they vote, we immediatelly take `activeBalance * penaltyPct / 10000` from their active balance.
- * If the round is not the last one:
-   * the dispute state becomes `PRE_DRAFT` , which means we can call `draft` and start choosing guardians as we were doing before. Everything above just gets repeated.
+  * If the round that has to get created is the last one, 
+    * the dispute state becomes `Adjucating`, which means there'll be no `drafting` at all.
+    * people now can vote on it, but since there was no draft and there was no choosen guardians, in this last round, anyone can vote if they have enough weight - `(activeBalance * 1000 / minActiveBalance) != 0 `. When they vote, we immediatelly take `activeBalance * penaltyPct / 10000` from their active balance.
+  * If the round is not the last one:
+    * the dispute state becomes `PRE_DRAFT` , which means we can call `draft` and start choosing guardians as we were doing before. Everything above just gets repeated.
      
 
