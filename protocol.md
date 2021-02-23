@@ -14,6 +14,9 @@ for the `0th round`. I guess, `submitEvidence` and `closeEvidencePeriod` only wo
 
 4. it seems like votes can vote `2,3 or 4`. How do we know what each one of those represent ?
 
+5. how
+
+
 ### Guardians Registry
 
 Each guardian has:
@@ -40,4 +43,24 @@ Basically this means that users can't deactivate the `activationLocks` money, un
 ### First Step (We create the dispute)
 
 
-### STEP 1 (Someone creates a dispute)
+### STEP 1 
+
+*  `GovernQueue`'s challenge creates a dispute and passes `possibleRulings` as 2.
+*  `CreateDispute` creates a dispute and its first round.  
+*  
+   * The creator of the dispute must pay `_guardiansNumber * (guardianFee + settleFee + draftFee)`. (`_guardiansNumber` is the number of guardians that should be drafted). The fee gets transfered from `msg.sender` to `Treasury` contract.
+ 
+*  Now, someone has to call `draft` so that guardians(people who will vote) can be selected to resolve the dispute somehow.  
+   * The `draft` will always be applied to the last round.  
+   * Each round has `guardiansNumber` set on it which is the number how many guardians need to be chosen for drafting/voting. If we decide to
+apply `3000` for `guardiansNumber`, `draft` function will never succeed because of gas costs. Because of this, protocol makes sure that maximum number of guardians that can be chosen at a time is `maxGuardiansPerDraftBatch`. If we set our `guardiansNumber` to 3000, it means we call the `draft` function multiple times until all of those `3000` are chosen. 
+   * After all `guardiansNumber` is chosen, `draft` immediatelly ends which means no one can call it anymore and the status of the dispute changes from `PreDraft` to `Adjudicating`. 
+   * Whoever calls `draft` gets `draftFee * draftedGuardians` as the reward on the `Treasury`. `draftedGuardians` doesn't have to be the `guardiansNumber`, as we allow batching.
+   * When the `draft` happens, it's possible that the same `guardian` can be chosen multiple times. When this happens, we increase the `weight` for each guardian
+by 1. The more the weight, the more will be penalty in case of losing and the more will be reward in case of winning.
+
+* The actual `draft` process is tricky and let's not get into it. Basically, whoever gets chosen, we lock the `penaltyPct` percent of the `minActiveBalance` on their address and they will not be able to `deactivate/unstake` it.
+
+* The next thing that happens is users can start voting(`commiting`). 
+* Then, they can start `revealing`.  Let's say `guardianA` was chosen 3 times, `guardianB` was chosen 1 time.  The `guardianA` votes on `2nd` vote, The `guardianB` votes on `3rd` vote. Now, the `2nd` vote will have 3 votes(weight) and `3rd` vote will have 1 vote(weight). The winner outcome is that has most votes(weight)
+
