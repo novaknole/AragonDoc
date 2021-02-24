@@ -4,7 +4,7 @@ Depl
 
 | Test                                                                                                                                   | slot 1 | slot 2 |   |   |   |   |   |   |
 |----------------------------------------------------------------------------------------------------------------------------------------|--------|--------|---|---|---|---|---|---|
-| `baseFactory.methods.newGovernWithoutConfig( "DAO-7" ,  "0x0000000000000000000000000000000000000000" ,  "GIORGI1" ,  "GIO" ,  false )` | `nice` | test3  |   |   |   |   |   |   |
+| `baseFactory.methods.newGovernWithoutConfig( "DAO-7" ,  "0x0000000000000000000000000000000000000000" ,  "GIORGI1" ,  "GIO" ,  false fffffffffffffffffffffff)` | `nice` | test3  |   |   |   |   |   |   |
 |                                                                                                                                        |        |        |   |   |   |   |   |   |
 |                                                                                                                                        |        |        |   |   |   |   |   |   |
 |                                                                                                                                        |        |        |   |   |   |   |   |   |
