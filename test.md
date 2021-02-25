@@ -14,6 +14,7 @@ Then, create the `.env` file in the root directory of this package and include t
 * `MNEMONIC_RINKEBY=MNEMONIC_FOR_RINKEBY`
 * `MNEMONIC_MAINNET=MNEMONIC_FOR_MAINNET`
 
+If you don't want to verify contracts on etherscan right away after deploying the contracts, you can omit `ETHERSCAN_KEY` from the `.env` config.
 
 # Deployment
 
