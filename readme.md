@@ -173,12 +173,17 @@ await this.registry.unstake(
 );
 ```
 
+## Deployment
 
-Before explaining how you can contribute, It's worth mentioning that we use `develop` branch as the default one. This makes it easier for us to
-have all the latest, development changes without affecting the current production version. Though, We don't use `release` branches to make the process a little bit easier !
- * Pushing to `develop` branch via PR deploys changes to testing environments(currently only rinkeby). 
- * Pushing to `master` branch via PR from `develop` deploys changes to production servers(mainnet).
- * Creating PRs end up in relation to `develop` by default.
+All the deployment scripts are built on top of Buidler. Before running any deployment scripts, make sure to create `.env` file in the
+current directory. You can create the following variables in there:
 
-This means that after you clone the project, the branch by default will be set to `develop` which can be unstable. So, if you want to start from the stable
-version, make sure to switch to `master` branch. 
+* RINKEBY_PRIVATE_KEY
+* MAINNET_PRIVATE_KEY
+
+Once you have done that, you can deploy an Aragon Court instance by running:
+
+* yarn deploy-court --network rinkeby
+* yarn deploy-court --network mainnet
+
+Currently, we only support deploying on the following networks, but will support more in the future.
