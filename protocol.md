@@ -129,23 +129,7 @@ await this.court.grant(
 
 ```
 This is the first deployment of Protocol...... 2h term duration...
- evidenceTerms:                  bn(21),               // evidence period lasts 21 terms (7 days)
- commitTerms:                    bn(2),                // vote commits last 6 terms (2 days)
- revealTerms:                    bn(2),                // vote reveals last 6 terms (2 days)
- appealTerms:                    bn(2),                // appeals last 6 terms (2 days)
- appealConfirmTerms:             bn(2),                // appeal confirmations last 6 terms (2 days)
- maxGuardiansPerDraftBatch:      bn(81),               // max number of guardians drafted per batch
- 
-const ANT = {
-  symbol: 'ANT',
-  decimals: 18,
-  address: '0xf0f8D83CdaB2F9514bEf0319F1b434267be36B5c' // Rinkeby ANT v2
-}
-const DAI = {
-  symbol: 'DAI',
-  decimals: 18,
-  address: '0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735' // fake Rinkeby DAI
-}
+
 {
   "court": {
     "address": "0xC464EB732A1D2f5BbD705727576065C91B2E9f18",
@@ -170,6 +154,35 @@ const DAI = {
   "paymentsBook": {
     "address": "0x4d0161Badb05b6B80cD54CA917e195D5bE98bd5E",
     "transactionHash": "0x55d2dd59d58025937b9211d3d3fbe9a80ede5a337254b238e0655225d96c255f"
+  }
+}
+
+This is on the rinkeby network too, but with term duration as 10 minutes.
+
+{
+  "court": {
+    "address": "0xD2c15eCd1751C2cE8b02ab2D95db32E662517D61",
+    "transactionHash": "0xc56cde607525f100037dbaf706098db04727e640d59f8659d492d16aff4d206a"
+  },
+  "disputes": {
+    "address": "0xdc4db21C9Ba5226dCF3d0ce4D0e277AdE3AbCA40",
+    "transactionHash": "0xce0cf8dfbc58c02f767c0f649a99433db0ecd4527a0dcfe2fbcd60d4dab6bf98"
+  },
+  "registry": {
+    "address": "0x72f86668812DFBed665DD7879b3CF9CA05a51489",
+    "transactionHash": "0xe207ed1abd92a7383c7484ae11cb66294792e2b631478bc27692130de448a652"
+  },
+  "voting": {
+    "address": "0x3B0619a6bDaa145EebffD649852010C40Ff603a0",
+    "transactionHash": "0xc347e89608f6d5b01d442ffd4006cd0c6ca2db1e1ace37ab023b7ac9003048aa"
+  },
+  "treasury": {
+    "address": "0x831598961f14f477F5Ae3d23CeDc5b2b3c6eBb19",
+    "transactionHash": "0x1c20477523aee52b546e0a5181d0ec88d6fd842028dc544a843c4452160098e4"
+  },
+  "paymentsBook": {
+    "address": "0x932dCB8d618e150e3B0A5cCB1e62340bf39b7Cda",
+    "transactionHash": "0x3f59cd6940e450b0462c671d812f7ad55551dc5d590564c6495310df5f7955d7"
   }
 }
 ```
