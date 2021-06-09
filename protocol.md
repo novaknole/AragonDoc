@@ -96,7 +96,7 @@ The catch here is that `settlePenalties` have to be called separately for each r
 
 
 
-**
+Quick References of function calls.
 
 
 ```js
@@ -125,3 +125,51 @@ await this.court.grant(
 ```
 
 
+### Rinkeby Network...
+
+```
+This is the first deployment of Protocol...... 2h term duration...
+ evidenceTerms:                  bn(21),               // evidence period lasts 21 terms (7 days)
+ commitTerms:                    bn(2),                // vote commits last 6 terms (2 days)
+ revealTerms:                    bn(2),                // vote reveals last 6 terms (2 days)
+ appealTerms:                    bn(2),                // appeals last 6 terms (2 days)
+ appealConfirmTerms:             bn(2),                // appeal confirmations last 6 terms (2 days)
+ maxGuardiansPerDraftBatch:      bn(81),               // max number of guardians drafted per batch
+ 
+const ANT = {
+  symbol: 'ANT',
+  decimals: 18,
+  address: '0xf0f8D83CdaB2F9514bEf0319F1b434267be36B5c' // Rinkeby ANT v2
+}
+const DAI = {
+  symbol: 'DAI',
+  decimals: 18,
+  address: '0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735' // fake Rinkeby DAI
+}
+{
+  "court": {
+    "address": "0xC464EB732A1D2f5BbD705727576065C91B2E9f18",
+    "transactionHash": "0x01d7995d4fcb7276b44d814819d7473c222e7e399863022c665e48b41faaa110"
+  },
+  "disputes": {
+    "address": "0x6Afb995035057007BDc800D7e83B50b892eA4968",
+    "transactionHash": "0x9a380dd42845e37fcd218cb348d18fe60c1d626a2e821c722918b8a67b65225d"
+  },
+  "registry": {
+    "address": "0x6d2c871534B5De76a70333100533C579ddf57B2E",
+    "transactionHash": "0x46af2515172532c5ca5dd025be6a29278445a5226f4cba5b53fa0c40674c714b"
+  },
+  "voting": {
+    "address": "0xF01AC1bB2068998a48D3AFE1F3A26C1245b9D382",
+    "transactionHash": "0xc4d1f7a2ae7cad87d3336863e986e403d69ea9783a18a3ee051ec6bb910409d2"
+  },
+  "treasury": {
+    "address": "0x960ca7BecD6BF0232E8146591a480608f942e64F",
+    "transactionHash": "0x53b12114c02f5835db23bcaa7d6f41ea5ff84c0d241ac86ceb90e9ab073045af"
+  },
+  "paymentsBook": {
+    "address": "0x4d0161Badb05b6B80cD54CA917e195D5bE98bd5E",
+    "transactionHash": "0x55d2dd59d58025937b9211d3d3fbe9a80ede5a337254b238e0655225d96c255f"
+  }
+}
+```
