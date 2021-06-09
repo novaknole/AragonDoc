@@ -82,8 +82,18 @@ The catch here is that `settlePenalties` have to be called separately for each r
 
 Graphs:
 
+Courts:
+
 * https://thegraph.com/explorer/subgraph/aragon/aragon-court-v2-staging (This is rinkeby staging)..
 * https://thegraph.com/explorer/subgraph/aragon/aragon-court-v2-rinkeby 
+* https://thegraph.com/explorer/subgraph/aragon/aragon-court-v2-mainnet
+
+Govern:
+
+* https://thegraph.com/explorer/subgraph/aragon/aragon-govern-rinkeby-staging (This is rinkeby staging)..
+* https://thegraph.com/explorer/subgraph/aragon/aragon-govern-rinkeby
+* https://thegraph.com/explorer/subgraph/aragon/aragon-govern-mainnet
+
 
 
 Quick References of function calls.
