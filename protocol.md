@@ -92,3 +92,36 @@ The catch here is that `settlePenalties` have to be called separately for each r
 
 * If the round isn't the last one, we take guardians' locked balance out of their account.
 * If the round is the last one, we don't take anything, because we already took it from their account when they voted. This happens, because when the round is the last one, there's no draft. So, we can't lock any balance while drafting. That's why we immediatelly take it from their balance when they vote for the last round. If they want to get it back, they can call `settleReward`, but of course, they should have voted for the right answer.
+
+
+
+
+**
+
+
+```js
+await this.court.heartbeat(100);
+await this.court.getDisputeFees();
+
+await this.court.setConfig(
+   657,
+   "0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735", // this.config.feeToken.address
+   [this.config.guardianFee, this.config.draftFee, this.config.settleFee],
+   [this.config.evidenceTerms, this.config.commitTerms, this.config.revealTerms, this.config.appealTerms, this.config.appealConfirmTerms],
+   [this.config.penaltyPct, this.config.finalRoundReduction],
+   [this.config.firstRoundGuardiansNumber, this.config.appealStepFactor, this.config.maxRegularAppealRounds, this.config.finalRoundLockTerms],
+   [this.config.appealCollateralFactor, this.config.appealConfirmCollateralFactor],
+   this.config.minActiveBalance
+)
+
+await this.court.grant(
+   soliditySha3(
+     '0x6d2c871534B5De76a70333100533C579ddf57B2E',  // guardians registry
+     // '0x2b7f012e' // stackeAndActivate
+     '0x51d2f186' // lockActivation
+   ), // id,
+   "0x8A3475C25452B280a3Af1A8a9B4440e9f70f2f30" // anj lock minter,
+)
+```
+
+
