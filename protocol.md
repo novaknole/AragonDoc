@@ -1,21 +1,5 @@
 This explains how Aragon Protocol Works.
 
-
-### Questions...
-
-
-1. Why does this https://github.com/aragon/protocol/blob/f1b3361a160da92b9bb449c0a05dee0c30e41594/packages/evm/contracts/disputes/DisputeManager.sol#L196 use
-`_getDisputeAndRound` and not `getDispute` ? passing 0 as `roundId` doesn't make sense, because if dispute exists, `round 0` also exists automatically.
-
-2. Why can't I submit evidence for each round separately and close evidence for each round separately ? it seems like that `closeEvidencePeriod` is only appropriate
-for the `0th round`. I guess, `submitEvidence` and `closeEvidencePeriod` only works in the beginning of the dispute when the round is still 0.
-
-3. I think this serves no purpose - https://github.com/aragon/protocol/blob/f1b3361a160da92b9bb449c0a05dee0c30e41594/packages/evm/contracts/voting/CRVoting.sol#L376
-
-4. it seems like votes can vote `2,3 or 4`. How do we know what each one of those represent ?
-
-5. It seems like that first we have to wait until the whole dispute is finished with the final ruling. and then we call `settlePenalties` one time for round 0, then we call `settleReward`, then we call again `settlePenalties` for round 1, and then we call `settleReward`.
-
 ### Guardians Registry
 
 Each guardian has:
