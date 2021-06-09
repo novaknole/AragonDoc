@@ -94,6 +94,12 @@ The catch here is that `settlePenalties` have to be called separately for each r
 * If the round is the last one, we don't take anything, because we already took it from their account when they voted. This happens, because when the round is the last one, there's no draft. So, we can't lock any balance while drafting. That's why we immediatelly take it from their balance when they vote for the last round. If they want to get it back, they can call `settleReward`, but of course, they should have voted for the right answer.
 
 
+-------
+
+Graphs:
+
+* https://thegraph.com/explorer/subgraph/aragon/aragon-court-v2-staging (This is rinkeby staging)..
+* https://thegraph.com/explorer/subgraph/aragon/aragon-court-v2-rinkeby 
 
 
 Quick References of function calls.
@@ -186,3 +192,5 @@ This is on the rinkeby network too, but with term duration as 10 minutes.
   }
 }
 ```
+
+
