@@ -94,7 +94,15 @@ Govern:
 * https://thegraph.com/explorer/subgraph/aragon/aragon-govern-rinkeby
 * https://thegraph.com/explorer/subgraph/aragon/aragon-govern-mainnet
 
+------
 
+Sites:
+
+* court.aragon.org
+* court-rinkeby.aragon.org
+
+* v1.court.aragon.org
+* v1.court.rinkeby.aragon.org
 
 Quick References of function calls.
 
