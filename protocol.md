@@ -193,6 +193,36 @@ This is on the rinkeby network too, but with term duration as 10 minutes.
     "transactionHash": "0x3f59cd6940e450b0462c671d812f7ad55551dc5d590564c6495310df5f7955d7"
   }
 }
+
+This is on rinkeby too but with 3 minutes term
+
+{
+  "court": {
+    "address": "0x9c003eC97676c30a041f128D671b3Db2f790c3E7",
+    "transactionHash": "0xae2b8fd1a35ee4162a2cb80f96c9a2450305c03099174f89645b65877137c397"
+  },
+  "disputes": {
+    "address": "0xC0e572c9Ceb06AdFE2d754AFae16C9e2037D3B7f",
+    "transactionHash": "0xd9454153ece2717422a8995320ed2b412e1f30fa9f8f4ef741d1ceabc9cb9c68"
+  },
+  "registry": {
+    "address": "0xd96B7f14a3230A05C5D5c4Fa17a8C14ED3879d50",
+    "transactionHash": "0x1a8dbf68221e39236e70185a7824a0b4680df5229b54094e12f1cec6274837ae"
+  },
+  "voting": {
+    "address": "0x7b6470C4959d34b179B6120e49eA56Bf44fD5334",
+    "transactionHash": "0xd94b62aa3a1e52c3a24e382c792d44dec63ff59b9f763f5740e2ae3607e64eba"
+  },
+  "treasury": {
+    "address": "0xa59EeAC6640Fa44F28dFa5424e5e3a47a6ad76Dc",
+    "transactionHash": "0x31f45bf8651b9f2f5b15e964da2e338d923ba13083f8d2fcafa5e77c6f04f72b"
+  },
+  "paymentsBook": {
+    "address": "0x8D86Bf7FC6C58cc04391C8513Aa9A221eb5edE08",
+    "transactionHash": "0x7e1dd75f19edd7d793ae35604c1663c3b66e77b6bde4bd2616be76b6f380d12b"
+  }
+}
+
 ```
 
 
