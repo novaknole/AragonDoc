@@ -13,17 +13,7 @@ Include something like this shit in it.
 }
 ```
 
-### Step 2... 
-
-This step is something that mightn't need to be done, but sometimes it requires. So, let's anyways do it.
-
-* clone dao-templates package and in the root, run `npm install @aragon/cli`.
-* go to `cd node_modules/@aragon/cli/dist/apm_cmds/util/runPublishTask.js` and add `transaction.chainId = 80001` or `137`. whatever polygon you're using.
-* go to `cd node_modules/@aragon/cli/dist/lib/deploy/deploy.js` and `chainId: 80001 or chainId: 137` in the `send`.
-* go to `cd node_modules/@aragon/apm/index.js` and update this line `ipfs: ipfs(options.ipfs),` with `ipfs: ipfs(api)`,
-
-
-### STEP 2
+### Step 2..
 
 Aragon OS is the package where all the main contracts are stored.. (DaoFactory, Kernel, ACL, .e.t.c)
 
@@ -44,70 +34,75 @@ D  Now, note that we use Aragon OS v4.4.0 which contains the fixes for ACL , I d
 
 1. OWNER=0x94C34FB5025e054B24398220CBDaBE901bd8eE5e npx truffle exec --network mumbai scripts/deploy-test-ens.js (Deploys ENS) 
 2. OWNER=0x94C34FB5025e054B24398220CBDaBE901bd8eE5e npx truffle exec --network mumbai scripts/deploy-daofactory.js (Deploys DaoFactory) 
-3. OWNER=0x94C34FB5025e054B24398220CBDaBE901bd8eE5e ENS={ens} DAO_FACTORY={daofactory} npx truffle exec --network mumbai scripts/deploy-apm.js 
+3. OWNER=0x94C34FB5025e054B24398220CBDaBE901bd8eE5e ENS=0x431f0eed904590b176f9ff8c36a1c4ff0ee9b982 DAO_FACTORY=0xa48e321d8ebab7ccd52503d630c894b62a2f639b npx truffle exec --network mumbai scripts/deploy-apm.js 
 
-### Step 3
+### Step 3...(Deploying aragon-apps)
 
-Now, we need to deploy MiniMeTokenFactory and AragonID (we can find better way maybe ? )
+* git clone https://github.com/aragon/aragon-apps
 
-This is tricky, as I am not sure if this deploys the latest artifacts from those contracts. **NOTE** that the way below could also deploy all the stuff that we did
-above, but I still prefer to use the above one as I am more sure that it uses latest artifacts.
+Now, let's deploy finance as an example and repeat the same steps for each one of them.
 
-a. Clone https://github.com/aragon/dao-templates
-b. Run `yarn`
-c. The template that you are planning on publishing, go to that package,  and whatever is there, change it with 
+* go to finance folder and `yarn add -dev @aragon/buidler-aragon`
+* go to `buidler.config.js` and add `usePlugin('@aragon/buidler-aragon')`
+* go to `buidler.config.js` and add 
+
+```
+ mumbai: {
+   url: 'https://polygon-mumbai.g.alchemy.com/v2/z3go4SKtSuiegUwtfkfd5tBCLDTcwYP_',
+   accounts: ["yourPrivateKey"]
+ }
+```
+
+* go to `app` folder, and build it with `npm run build`.
+* the previous creates the `build` folder inside `app` folder. Copy its contents and place it inside `dist` folder of finance folder.
+* update `arapp.json` and add this
+```
+     "mumbai": {
+      "registry": "0xc38f78e76869116c0e8ba3d8bcdf5887765287fa", // (this is ens registry)
+      "appName": "finance.aragonpm.eth",
+      "network": "mumbai"
+    }
+```
+* run `npx buidler publish major --network mumbai --ipfs-api-url https://ipfs.infura.io:5001`
+
+### Step 4...(Deploying dao templates)
+
+We came at this step so that we still need `MiniMeTokenFactory` and `AragonID` contracts deployed.. 
+
+* go to `cd shared/lib/TemplatesDeployer.js`
+* We have to comment some stuff. 
+
+1. find this `await this._checkAppsDeployment()` and comment it out.
+2. where we call `registerDeploy` function, comment it.
+
+* go to `cd shared/scripts/deploy-template.js` and make `verbose:true` instead of false.
+
+We comment these stuff, because if we don't, it tries to deploy contract and also publish it to APM. That would be good, but problem is it tries to publish
+to APM with `0x` empty hash as ContentURI(ipfs hash) and this brings whole other problems. So won't go into deep details for now.
+
+Now, I am gonna do the deployment for `company template`. Same should apply to others.
+
+* update `arapp.json` . You should know how by now. hahaha.
+* add this to `package.json` in company template.
 
 ```js
-module.exports = require('@aragon/truffle-config-v4’)
+"deploy:mumbai": "truffle exec ./scripts/deploy.js --network mumbai --ens 0x431f0eed904590b176f9ff8c36a1c4ff0ee9b982 --dao-factory 0xa48e321d8ebab7ccd52503d630c894b62a2f639b"
 ```
 
-We do this because truffle-config-v4 already contains Mumbai and matic network.
-		
-* cd templates/company. (Anyways run `yarn` again )
-* Run `yarn compile`
-* Let's uncomment everything from the `TemplatesDeployer` so that it only deploys aragonID and MiniMeTokenFactory. 
-* add this in package.json and run it 
-```
-"deploy:mumbai": "truffle exec ./scripts/deploy.js --network mumbai --ens 0x10e4c5975f2c2fc8cc64ba6b334a7ba5675082da --dao-factory 0x266817b8cc1a466101355cdf2fa18211a745f15f
-```
-* Above gives us aragonId and MinimeTokenFactory.. Now let's change the command to this:
-
-### Step 4 (Deploying Aragon Apps)
+and run this with `yarn deploy:mumbai`.
 
 
-### Step 5 (Deploying Templates)
+If you follow all the previous steps, this will deploy minime token factory and aragonId only + This will also deploy the company template with all the arguments. Copy those addresses. If you decide to update company template, You gotta update the above `deploy:mumbai` script and also pass `minime-token-factory` and `aragonId`..
 
-Let's do this for Company Template.
 
-* update package.json such as
+Now,  we gotta publish the contract and ipfs content to APM and ipfs.
 
-```
-"deploy:mumbai": "truffle exec ./scripts/deploy.js --network mumbai --ens 0x67be86e17d43ed284c008ce0e614bd0b69497869 --dao-factory 0x266817b8cc1a466101355cdf2fa18211a745f15f --mini-me-factory 0x51157EF91f7848105a6be6d6d9A5933365184c34 --aragon-iD 0xf5042ec5888d404b7851db02fc56317818fcf88f"
+1. copy the same buidler settings from `aragon-apps` package into `company` template.
+2. run 
+
+```js
+npx buidler compile && npx buidler publish major --contract 0x282d6bf70d08bc02781631678111e772994a3d79 --network mumbai --ipfs-api-url https://ipfs.infura.io:5001`
 ```
 
-* Make sure that above gives us template address. You can check the code of TemplatesDeployer to achieve this... Also, note that we should not register any package in it
-* Then, we can run
 
-```
-
-===== STEP 4 =========
-
-
-
-====== STEP 4 =========
-
-DEPLOYING the template… Let’s goo
-
-1. Cd templates/company
-2. Npm install @aragon/cli (globally installed Aragon cli has some problem)
-3. Go to `arapp.json` and put this
-"mumbai": {
-      "appName": "company-template.aragonpm.eth",
-      "network": "mumbai",
-      "registry": “0x67be86e17d43ed284c008ce0e614bd0b69497869”,
-      "wsRPC": "wss://matic-testnet-archive-ws.bwarelabs.com"
-    }
-
-
-
-
+And we got the company template as well.
