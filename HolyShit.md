@@ -137,3 +137,14 @@ we would get different than 1.0.0.
 * If we update the contract on an app, we have to pass `major` in buidler publish. When this all happens, the UI on client will still use the old version. If we want it to use new versions, we go to client and upgrade app from there which causes new action to be performed and it needs voting to be passed. If we don't update contract and just UI on an app, we publish it with `minor/patch` and if that happens, UI is going to reflect it automatically. 
 
 
+**NOTE** When we deploy the aragon app or template with `npx buidler publish`, we can pass manager address.. This manager address is basically who can update versions of those apps or template. By default, it's the deployer's address.
+
+
+### Summary of Aragon Contracts.
+
+Aragon DAO is presumed to be called `Kernel` Contract. 
+
+* Aragon Deploys `Kernel` contract as the base contract one time only.
+* When User deploys dao, we deploy `KernelProxy` contract and pass the base contract s that this proxy uses the base as the delegate calls.
+* If user chooses company template and deploys it with let's say voting and finance contract, what happens is we deploy `AppProxyUpgradable` contracts for each one of them(voting, finance). It's a proxy contract and while we deploy it, we also call `initialize()` function on both voting and finance so that state can be initialized on Proxy contracts as well.
+
