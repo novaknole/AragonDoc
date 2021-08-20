@@ -106,5 +106,34 @@ Now,  we gotta publish the contract and ipfs content to APM and ipfs.
 npx buidler compile && npx buidler publish major --contract 0x282d6bf70d08bc02781631678111e772994a3d79 --network mumbai --ipfs-api-url https://ipfs.infura.io:5001`
 ```
 
-
 And we got the company template as well.
+
+
+# Some Learnings
+
+### Template Stuff
+
+* Aragon Client has templates(company, membership, reputation, e.t.c).. They are located in dao-templates repository.
+ They consist of arapp.json, manifest.json, their respective contract. for Company, it's CompanyTemplate.sol, for reputation, it's ReputationTemplate.sol.
+Steps that need to be done.. Let's take company template as an example.
+  * we deploy the company's directory to the ipfs. = ipfsHash (This deploys `artifact.json, manifest.json, code.sol` . `CompanyTemplate.sol` becomes `code.sol`.  `arapp.json` becomes `artifact.json`)
+  * we deploy `CompanyTemplate.sol` = contractAddress
+  * When we deploy the template for the first time, It creates a `Repo` contract for it through `RepoRegistry` contract's `newRepoWithVersion` function. `newRepoWithVersion` expects these arguments: `company-template.aragonpm.eth`, [1.0.0], `contractAddress`, `contentURI(ipfsHash)`. 
+  * `Repo` is basically where it contains all the versions of contract and ipfs stuff for these templates. If we wanna update the template, we update it, publish it to `Repo`'s `newVersion` function. And client then can fetch the latest `contractAddress` and `ipfs` stuff.
+  * After the `Repo` contract address is created, it stores this Repo address on the ENS registry with the key of template `company-template.aragonpm.eth`.
+
+  Now when the client needs the companyTemplate contract, it calls ENS first with the key `company-template.aragonpm.eth` to get the repo address.
+When it has the repoAddress, it calls getLatest() on this repoAddress, and we get [1.0.0, contractAddress, ipfsHash]. if we updated the version, for sure
+we would get different than 1.0.0. 
+
+**NOTE** Aragon Deploys those templates. Users don't need to deploy them... 
+
+### Aragon App
+
+  Each template needs some apps(voting, finance, and many more.), otherwise, it's a template, and nothing more. Now,  we also need to be doingthe same kind of deployments for these apps.
+
+* Each app has its own name(voting.aragonpm.eth, finance.aragonpm.eth, .e.t.c) These apps are located in Aragon apps.
+* They are registered on ENS with their name and corresponding address is the repo addresses. They have their own repo contract. https://github.com/aragon/apm/blob/0d68cd2bf4e4e22c8871614b93a87e82e7586515/contracts/apm/Repo.sol. Repo contract for each one of the app is created by the app developer itself. Users don't deploy this repo address. Client just fetches the corresponding version
+* If we update the contract on an app, we have to pass `major` in buidler publish. When this all happens, the UI on client will still use the old version. If we want it to use new versions, we go to client and upgrade app from there which causes new action to be performed and it needs voting to be passed. If we don't update contract and just UI on an app, we publish it with `minor/patch` and if that happens, UI is going to reflect it automatically. 
+
+
