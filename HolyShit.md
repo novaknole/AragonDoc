@@ -19,8 +19,10 @@ Aragon OS is the package where all the main contracts are stored.. (DaoFactory, 
 
 a. So, logically, we need to deploy DaoFacory and that should be it in terms of contracts, because DaoFactory will already include 
 other contracts that are necessary for the contract deployment.
+
 b. We also need to deploy ENS(if we already got one, which is the case for mainnet/rinkeby/ropsten, then we don’t deploy it and we just pass ENS when we need it, 
 otherwise, we deploy our own ENS which is the case in Polygon Mumbai, as this network doesn’t have ENS or whatever the fuck)…
+
 c.  We also need to deploy APM (Aragon Package Manager). We will see later what it is..
 
 To do those STEP 2 stuff,   we need to do the following, but a little history before then..
