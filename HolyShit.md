@@ -148,3 +148,17 @@ Aragon DAO is presumed to be called `Kernel` Contract.
 * When User deploys dao, we deploy `KernelProxy` contract and pass the base contract s that this proxy uses the base as the delegate calls.
 * If user chooses company template and deploys it with let's say voting and finance contract, what happens is we deploy `AppProxyUpgradable` contracts for each one of them(voting, finance). It's a proxy contract and while we deploy it, we also call `initialize()` function on both voting and finance so that state can be initialized on Proxy contracts as well.
 
+
+### Let's go more advanced. 
+
+* Aragon Deploys `ACL` and `Kernel` contracts one time. Let's call those `base contracts(base ACL and base Kernel)`. Then deploys `DaoFactory` and passes those base contracts.
+* DaoFactory creates new DAOS. The new dao is a `KernelProxy` that will redirect all calls to `base kernel` through delegate call. We also do the same shit for `base acl` and get it as `KernelProxy`. We then set this new `ACL` address on this dao.
+
+So basically, We have a Kernel that has `ACL` inside.
+
+* We then deploy `Company template` one time with the `DaoFactory` Address.
+
+Let's say user now wants to create a dao.
+
+* Company Template creates a new dao through `DaoFactory.newDao`. Which means at this step, we got Kernel and ACL inside Kernel.
+* We then install new apps. For each app, `AppProxyUpgradable` contract gets created and we set the same ACL that Kernel had on each app. **IMPORTANT**: If we want to change roles/permissions on any of the apps, we gotta go through Kernel's ACL.
