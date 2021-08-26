@@ -77,8 +77,6 @@ We came at this step so that we still need `MiniMeTokenFactory` and `AragonID` c
 1. find this `await this._checkAppsDeployment()` and comment it out.
 2. where we call `registerDeploy` function, comment it.
 
-* go to `cd shared/scripts/deploy-template.js` and make `verbose:true` instead of false.
-
 We comment these stuff, because if we don't, it tries to deploy contract and also publish it to APM. That would be good, but problem is it tries to publish
 to APM with `0x` empty hash as ContentURI(ipfs hash) and this brings whole other problems. So won't go into deep details for now.
 
