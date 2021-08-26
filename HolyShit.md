@@ -88,7 +88,7 @@ Now, I am gonna do the deployment for `company template`. Same should apply to o
 * In the package.json, you will see the below. Make sure to change `ens` and `dao-factory` with what you got in the previous steps.
 
 ```js
-"deploy:mumbai": "truffle exec ./scripts/deploy.js --network mumbai --ens 0x431f0eed904590b176f9ff8c36a1c4ff0ee9b982 --dao-factory 0xa48e321d8ebab7ccd52503d630c894b62a2f639b"
+"deploy:mumbai": "truffle exec ./scripts/deploy.js --network mumbai --ens yourENSAddress --dao-factory yourDaoFactoryAddress"
 ```
 
 and run this with `yarn deploy:mumbai`.
@@ -97,8 +97,6 @@ and run this with `yarn deploy:mumbai`.
 If you follow all the previous steps, this will deploy minime token factory and aragonId only + This will also deploy the company template with all the arguments. Copy those addresses. **IMPORTANT** Now, if you decide to deploy other templates, make sure to check their package.json, change `ens` and `dao-factory` addresses and also add another argument `--minime-token-factory minime-token-factory-address-here`. adding another argument is necessary, because we don't need to deploy minime token each time.
 
 Now,  we gotta publish the contract and ipfs content to APM and ipfs.
-
-21 run 
 
 ```js
 npx buidler compile && npx buidler publish major --contract templateAddressYouGotInPreviousStep --network mumbai --ipfs-api-url https://ipfs.infura.io:5001`
