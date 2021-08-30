@@ -72,7 +72,8 @@ For your own network, act accordingly and add specific url.
 
 ### Step 4...(Deploying dao templates)
 
-**NOTE** The dao templates package currently only contains the necessary code for company, reputation, membership templates
+**NOTE 1** The dao templates package currently only contains the necessary code for company, reputation, membership templates
+**NOTE 2** Each template contains `truffle.js` file which imports `@aragon/truffle-config-v4`. If that package doesn't contain the chain that you want, let us quickly know and we will update the package to include your new chain as well in seconds.
 
 We came at this step so that we still need `MiniMeTokenFactory` and `AragonID` contracts deployed.. 
 
