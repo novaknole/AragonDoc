@@ -165,4 +165,4 @@ So basically, We have a Kernel that has `ACL` inside.
 Let's say user now wants to create a dao.
 
 * Company Template creates a new dao through `DaoFactory.newDao`. Which means at this step, we got Kernel and ACL inside Kernel.
-* We then install new apps. For each app, `AppProxyUpgradable` contract gets created and we set the same ACL that Kernel had on each app. **IMPORTANT**: If we want to change roles/permissions on any of the apps, we gotta go through Kernel's ACL.
+* We then install new apps. For each app, `AppProxyUpgradable` contract gets created and we set the same ACL that Kernel had on each app. **IMPORTANT**: If we want to change roles/permissions on any of the apps, we gotta go through Kernel's ACL..
