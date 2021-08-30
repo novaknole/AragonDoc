@@ -41,6 +41,7 @@ D  Now, note that we use Aragon OS v4.4.0 which contains the fixes for ACL , I d
 ### Step 3...(Deploying aragon-apps)
 
 * git clone https://github.com/aragon/aragon-apps
+* create `.env` file in the root directory of the whole package and add `ETH_KEYS=YourPrivateKey`. Make sure it starts with `0x`.
 
 Now, let's deploy finance as an example and repeat the same steps for each one of them.
 
@@ -69,18 +70,22 @@ Now, let's deploy finance as an example and repeat the same steps for each one o
 
 ### Step 4...(Deploying dao templates)
 
+**NOTE** The dao templates package currently only contains the necessary code for company, reputation, membership templates
+
 We came at this step so that we still need `MiniMeTokenFactory` and `AragonID` contracts deployed.. 
+
+* create `.env` file in the root directory of the whole package and add `ETH_KEYS=YourPrivateKey`. Make sure it starts with `0x`.
 
 Now, I am gonna do the deployment for `company template`. Same should apply to others.
 
-* go to `cd shared` and run `yarn link`. Then go to each template you want to deploy and run `@aragon/templates-shared`.
+* go to `cd shared` and run `yarn link`. Then go to each template you want to deploy and run `yarn link @aragon/templates-shared`.
 * go to `cd templates/company` and run `yarn` to install dependencies.
 * update `arapp.json` for each of the template. Pay attention to the `appName` and `registry` addresses. You should know how by now, but anyways, you gotta add the same kind of thing for your network. In this case, As an example, I'd add this:
 ```js
 "mumbai": {
-   "appName": "company-template.aragonpm.eth",
-   "network": "mumbai",
-   "registry": "0x431f0eed904590b176f9ff8c36a1c4ff0ee9b982",
+   "appName": "company-template.aragonpm.eth", // template name 
+   "network": "mumbai", // network name..
+   "registry": "0x431f0eed904590b176f9ff8c36a1c4ff0ee9b982", // ens registry address
    "wsRPC": "wss://matic-testnet-archive-ws.bwarelabs.com"
 }
 ```
@@ -91,7 +96,7 @@ Now, I am gonna do the deployment for `company template`. Same should apply to o
 "deploy:mumbai": "truffle exec ./scripts/deploy.js --network mumbai --ens yourENSAddress --dao-factory yourDaoFactoryAddress"
 ```
 
-and run this with `yarn deploy:mumbai`.
+and run this with `yarn deploy:mumbai`. If you're deploying this on another network, just try to change `--network` argument.
 
 
 If you follow all the previous steps, this will deploy minime token factory and aragonId only + This will also deploy the company template with all the arguments. Copy those addresses. **IMPORTANT** Now, if you decide to deploy other templates, make sure to check their package.json, change `ens` and `dao-factory` addresses and also add another argument `--minime-token-factory minime-token-factory-address-here`. adding another argument is necessary, because we don't need to deploy minime token each time.
