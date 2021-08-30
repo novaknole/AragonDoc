@@ -40,13 +40,13 @@ D  Now, note that we use Aragon OS v4.4.0 which contains the fixes for ACL , I d
 
 ### Step 3...(Deploying aragon-apps)
 
+**IMPORTANT** The below won't work work for `voting-disputable` and `agreement` apps.
+
 * git clone https://github.com/aragon/aragon-apps
 * create `.env` file in the root directory of the whole package and add `ETH_KEYS=YourPrivateKey`. Make sure it starts with `0x`.
 
 Now, let's deploy finance as an example and repeat the same steps for each one of them.
 
-* go to finance folder and `yarn add -dev @aragon/buidler-aragon`
-* go to `buidler.config.js` and add `usePlugin('@aragon/buidler-aragon')`
 * go to `buidler.config.js` and add 
 
 ```
@@ -56,17 +56,19 @@ Now, let's deploy finance as an example and repeat the same steps for each one o
  }
 ```
 
-* go to `app` folder, and build it with `npm run build`.
+For your own network, act accordingly and add specific url.
+
+* go to `app` folder of the finance folder, and build it with `npm run build`.
 * the previous creates the `build` folder inside `app` folder. Copy its contents and place it inside `dist` folder of finance folder.
 * update `arapp.json` and add this
 ```
      "mumbai": {
       "registry": "0xc38f78e76869116c0e8ba3d8bcdf5887765287fa", // (this is ens registry)
-      "appName": "finance.aragonpm.eth",
+      "appName": "finance.aragonpm.eth", // app name
       "network": "mumbai"
     }
 ```
-* run `npx buidler publish major --network mumbai --ipfs-api-url https://ipfs.infura.io:5001`
+* run `npx buidler publish major --network mumbai --ipfs-api-url https://ipfs.infura.io:5001` . `major` is not necessary unless you're updating the contract code as well. So make sure to pass `minor` or `patch`.
 
 ### Step 4...(Deploying dao templates)
 
