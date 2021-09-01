@@ -58,8 +58,7 @@ Now, let's deploy finance as an example and repeat the same steps for each one o
 
 For your own network, act accordingly and add specific url.
 
-* go to `app` folder of the finance folder, and build it with `npm run build`.
-* the previous creates the `build` folder inside `app` folder. Copy its contents and place it inside `dist` folder of finance folder.
+* go to `app` folder of the finance folder, and build it with `npm run build`. After this, do `cd ../`.
 * update `arapp.json` and add this
 ```
      "mumbai": {
